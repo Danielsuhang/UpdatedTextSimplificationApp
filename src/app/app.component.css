@@ -1,0 +1,17 @@
+textarea {
+    resize: none;
+}
+.highlightText {
+    background-color: yellow;
+}
+.form_container {
+    display: flex;
+    flex-direction: row;
+}
+
+mat-sidenav {
+    width: 12vw;
+}
+button{
+    white-space: pre-wrap !important;
+}
