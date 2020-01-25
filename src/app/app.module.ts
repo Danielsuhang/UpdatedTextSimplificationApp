@@ -26,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule, BrowserAnimationsModule, MatSliderModule, MatCardModule,
     MatButtonModule, MatIconModule,FormsModule,MatToolbarModule,
-    MatInputModule, HttpClientModule, MatChipsModule, MatSidenavModule
+    MatInputModule, HttpClientModule, MatChipsModule, MatSidenavModule, MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

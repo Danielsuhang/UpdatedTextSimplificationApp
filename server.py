@@ -35,11 +35,28 @@ def getBookFromDB(book_name):
     if type(book_name) is not str:
         book_name = book_name.decode("utf-8")
     mycol = mydb[book_name]
-    return list(mycol.find())
+    paragraphs = list(mycol.find())
+    return paragraphs
 
-def addParagraphToDB(processed_paragraph):
-    for i in range(len(processed_paragraph)):
-        mycol.insert_one({'index' : i, 'text' : processed_paragraph[i]})
+def createChapterNavigation(paragraphs):
+    chapters = []
+    chapterDict = {}
+    for idx, para in enumerate(paragraphs):
+        if "Chapter" in para:
+            chapters.append(para)
+        if idx > 100:
+            break
+    for chapter in chapters:
+        chapterDict[chapter] = next(i for i in reversed(range(len(paragraphs))) if paragraphs[i] == chapter)
+    return chapterDict
+
+# def addParagraphToDB(processed_paragraph):
+#     for i in range(len(processed_paragraph)):
+#         mycol.insert_one({'index' : i, 'text' : processed_paragraph[i]})
+
+# def deleteAllParagraphsBefore(mycol, paragraphs, index):
+#     for i in range(index):
+#         mycol.delete_one(paragraphs[i])
 
 @app.route('/')
 def getBook():
@@ -54,7 +71,8 @@ def getBook():
 def getParagraphs():
     paragraphs = getBookFromDB(request.args.get('title'))
     text = [x['text'] for x in paragraphs]
-    return jsonify({"books" : text})
+    chapters = createChapterNavigation(text)
+    return jsonify({"books" : text, "chapters": chapters})
 
 @app.route('/post-text', methods=['POST'])
 def postBook():

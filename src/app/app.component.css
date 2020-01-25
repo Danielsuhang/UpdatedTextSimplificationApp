@@ -8,6 +8,13 @@ textarea {
     display: flex;
     flex-direction: row;
 }
+.text_box {
+    overflow-y: scroll;
+}
+
+.mat-chip-list-wrapper {
+    justify-content: center;
+}
 
 mat-sidenav {
     width: 12vw;
