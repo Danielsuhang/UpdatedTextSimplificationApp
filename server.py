@@ -1,11 +1,15 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
+from bson import Binary, Code
+from bson.json_util import dumps
 
 from flask_pymongo import PyMongo
 
 from flask_jsonpify import jsonify
 import sys
+
+import http.client
 
 import pymongo
 
@@ -50,14 +54,6 @@ def createChapterNavigation(paragraphs):
         chapterDict[chapter] = next(i for i in reversed(range(len(paragraphs))) if paragraphs[i] == chapter)
     return chapterDict
 
-# def addParagraphToDB(processed_paragraph):
-#     for i in range(len(processed_paragraph)):
-#         mycol.insert_one({'index' : i, 'text' : processed_paragraph[i]})
-
-# def deleteAllParagraphsBefore(mycol, paragraphs, index):
-#     for i in range(index):
-#         mycol.delete_one(paragraphs[i])
-
 @app.route('/')
 def getBook():
     global langauge
@@ -74,11 +70,33 @@ def getParagraphs():
     chapters = createChapterNavigation(text)
     return jsonify({"books" : text, "chapters": chapters})
 
-@app.route('/post-text', methods=['POST'])
-def postBook():
-    global language
-    language = request.data
-    return '''<h1>The text value is: {}'''.format(language)
+@app.route('/stories')
+def getStories():
+    mycol = mydb['Cnn Stories']
+    stories = mycol.find_one()
+    return dumps(stories)
+
+@app.route('/nationalgeographic')
+def getNationalGeographic():
+    mycol = mydb['NationalGeographicKids']
+    stories = mycol.find_one()
+    if '_id' in stories.keys():
+        del stories['_id']
+    stories = {'article_names': dumps(stories.keys()), 'content': dumps(stories)}
+    return (stories)
+
+@app.route('/association')
+def getWordAssociation():
+    originalWord = request.args.get('word')
+    conn = http.client.HTTPSConnection("twinword-word-graph-dictionary.p.rapidapi.com")
+    headers = {
+        'x-rapidapi-host': "twinword-word-graph-dictionary.p.rapidapi.com",
+        'x-rapidapi-key': "884694c9f9msh86ce774b80786dcp191e83jsn6a5e6c22dd3f"
+        }
+    conn.request("GET", "/reference/?entry=" + originalWord, headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    return data
 
 if __name__ == "__main__":
     app.run(port=5002)

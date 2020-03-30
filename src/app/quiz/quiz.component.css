@@ -1,0 +1,25 @@
+.card {
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10rem;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.title {
+    color: 	#FF00FF!important;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.answer {
+    max-width: 50vw;
+    line-height: 130%;
+}

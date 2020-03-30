@@ -9,14 +9,14 @@ export enum KEY_CODE {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'simplfication',
+  templateUrl: './simplification-reading.component.html',
+  styleUrls: ['./simplification-reading.component.css'],
   //Allows innerHTML to accept classes
   encapsulation: ViewEncapsulation.None,
 })
 
-export class AppComponent implements OnInit {
+export class SimplificationReadingComponent implements OnInit {
   textContents: string;
   paragraphNumber: number;
   paragraphs: string[];
