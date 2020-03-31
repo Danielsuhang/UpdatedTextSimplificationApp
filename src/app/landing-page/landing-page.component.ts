@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { Router } from "@angular/router";
 
+import {SimplificationService} from "../service/simplification.service";
+
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 @Component({
@@ -11,7 +13,8 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private router: Router, liveAnnouncer: LiveAnnouncer) {
+  constructor(private router: Router, liveAnnouncer: LiveAnnouncer,
+    private simplificationService: SimplificationService) {
     liveAnnouncer.announce(this.welcomeMessage);
   }
 
@@ -26,7 +29,7 @@ export class LandingPageComponent implements OnInit {
 
   startQuiz() {
     const guid = Guid.newGuid();
-    this.saveUser(guid);
+    this.saveUser(guid, this.age.value, this.email.value, this.visuallyimpaired);
     this.router.navigate(['/quiz', guid]);
   }
 
@@ -35,8 +38,8 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(['/quiz', guid]);
   }
 
-  saveUser(guid: string) {
-
+  saveUser(guid: string, age: number, email:string, visuallyimpaired: boolean) {
+    this.simplificationService.postQuizIdentifiers(guid, age, email, visuallyimpaired);
   }
 
   submitIsValid() {

@@ -18,6 +18,15 @@ export class QuizComponent implements OnInit {
   article_names: string[];
 
   questionNumber: number = 0;
+  question: string[] = [
+    "Click on the text that is easier to read",
+    "Click on the text that makes more sense",
+    "Click on the text that I enjoyed reading more"
+  ];
+
+  // Question combination displayed on screen
+  currentTitle: string;
+  currentQuestion: string;
   currentOriginalText: string;
   currentSimplifiedText: string;
 
@@ -82,17 +91,25 @@ export class QuizComponent implements OnInit {
   }
 
   getNextQuestion() {
-    if (this.questionNumber < this.simplification_list.length) {
-      this.currentOriginalText = this.simplification_list[this.questionNumber].original_text;
-      this.currentSimplifiedText = this.simplification_list[this.questionNumber].simplified_text;
+    if (this.questionNumber < (this.simplification_list.length * this.question.length)) {
+      this.updateQuestion();
       this.questionNumber++;
     } else {
-      this.loadResultsPage();
+      this.exitQuiz();
     }
   }
 
-  loadResultsPage() {
-    console.log("Done!");
+  updateQuestion() {
+    var simplification_index = Math.floor(this.questionNumber / this.question.length);
+    var question_index = Math.floor(this.questionNumber % this.question.length)
+    this.currentTitle = this.article_names[simplification_index];
+    this.currentQuestion = this.question[question_index];
+    this.currentOriginalText = this.simplification_list[simplification_index].original_text;
+    this.currentSimplifiedText = this.simplification_list[simplification_index].simplified_text;
+  }
+
+  exitQuiz() {
+    this.simplificationService.postQuizResults(this.guid, "Test");
   }
 
   ngOnDestroy() {

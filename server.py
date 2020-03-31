@@ -85,6 +85,32 @@ def getNationalGeographic():
     stories = {'article_names': dumps(stories.keys()), 'content': dumps(stories)}
     return (stories)
 
+@app.route('/postquizidentifiers')
+def postQuizIdentifiers():
+    mycol = mydb['QuizSubmissions']
+    guid = request.args.get("guid")
+    age = request.args.get("age")
+    email = request.args.get("email")
+    visually_impaired = request.args.get("visuallyimpaired")
+    data = {'guid': guid, 'age': age, 'email': email, 
+        'visuallyimpaired' : visually_impaired}
+    if (mycol.find({'guid': guid}).count() == 0):
+        mycol.insert_one(data)
+        return {"value": "success"}
+    else:
+        return {"value": "duplicate guid found"}
+
+
+@app.route('/postquizresults')
+def postQuizResults():
+    mycol = mydb['QuizSubmissions']
+    guid = request.args.get("guid")
+    test = request.args.get("test")
+    myquery = {"guid": guid}
+    newvalues = {"$set" : {'test': test}}
+    mycol.update_one(myquery, newvalues)
+    return {"value" : "success"}
+
 @app.route('/association')
 def getWordAssociation():
     originalWord = request.args.get('word')
