@@ -16,12 +16,12 @@
 }
 
 .title {
-    color: #00bcd4!important;
+    color: #f2223280!important;
 }
 
 .card blockquote {
-    max-width: 33.5rem;
     line-height: 1.7;
+    font-weight: bold;
 }
 
 #startquiz {
@@ -61,3 +61,5 @@ button {
     margin-top: 3rem;
 }
 }
+
+

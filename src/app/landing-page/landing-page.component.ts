@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { Router } from "@angular/router";
 
+import {Simplification} from '../types/simplification';
+
 import {SimplificationService} from "../service/simplification.service";
 
 import {LiveAnnouncer} from '@angular/cdk/a11y';
@@ -19,9 +21,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   welcomeMessage: string = 
-      "Welcome to our Text Simplification Game! To continue with the chance to win prizes " +
-      "enter your email, age, and if you have a visual impairment.";
-  email = new FormControl('', [Validators.required, Validators.email]);
+    "Tell us a bit about yourself"
   age = new FormControl('', [Validators.required, Validators.min(0), Validators.max(99)]);
   visuallyimpaired = false;
   ngOnInit() {
@@ -29,7 +29,7 @@ export class LandingPageComponent implements OnInit {
 
   startQuiz() {
     const guid = Guid.newGuid();
-    this.saveUser(guid, this.age.value, this.email.value, this.visuallyimpaired);
+    this.saveUser(guid, this.age.value,  this.visuallyimpaired);
     this.router.navigate(['/quiz', guid]);
   }
 
@@ -38,12 +38,13 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(['/quiz', guid]);
   }
 
-  saveUser(guid: string, age: number, email:string, visuallyimpaired: boolean) {
+  saveUser(guid: string, age: number, visuallyimpaired: boolean) {
+    var email = "default"
     this.simplificationService.postQuizIdentifiers(guid, age, email, visuallyimpaired);
   }
 
   submitIsValid() {
-    return !this.age.invalid && !this.email.invalid;
+    return !this.age.invalid;
   }
 
   getErrorMessage(formControl: FormControl, errorMessage?: string) {

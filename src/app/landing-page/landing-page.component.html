@@ -1,33 +1,31 @@
-<mat-card class="card">
-    <div class="card-content">
-        <h3 class="title">Simplification Game</h3>
-        <blockquote>
-            {{welcomeMessage}}
-        </blockquote>
-        <form (ngSubmit)="startQuiz()" class="form">
-            <mat-form-field appearance="fill" class="form_components">
-                <mat-label for="email">Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" id="email" aria-label="Email" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage(email, 'Invalid email')}}</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="form_components">
-                <mat-label for="age">Age</mat-label>
-                <input matInput type="number" placeholder="E.g: 12" aria-label="Age" [formControl]="age" min="0"
-                    max="99" id="age" required>
-                <mat-error *ngIf="age.invalid">{{getErrorMessage(age)}}</mat-error>
-            </mat-form-field>
-            <mat-checkbox [(ngModel)]="visuallyimpaired" class="form_components" name="visually_impaired">
-                Are you visibly impaired?
-            </mat-checkbox>
-            <br />
-            <div class="row">
-                <button mat-raised-button [disabled]="!submitIsValid()" [attr.aria-hidden]="!submitIsValid()" type="submit" color="primary" id="startquiz">
-                    Start Quiz!
-                </button>
-                <button mat-button id="startquiz" (click)="startQuizWithoutDetails()">
-                    Skip
-                </button>
+
+        <mat-card class="card">
+            <div class="card-content">
+                <h3 class="title">Simplification Game</h3>
+                <img src="//www.gstatic.com/apollo/icons/registry/account@1x-674258229d06e71ad937d9e873ce06f7.png" srcset="//www.gstatic.com/apollo/icons/registry/account@2x-4827e044cc673cc9c85cedfbe8e87d1c.png 3x" alt="" aria-hidden="true">
+                <blockquote>
+                    {{welcomeMessage}}
+                </blockquote>
+                <form (ngSubmit)="startQuiz()" class="form">
+                    <mat-form-field appearance="fill" class="form_components">
+                        <mat-label for="age">Age</mat-label>
+                        <input matInput type="number" placeholder="E.g: 12" aria-label="Age" [formControl]="age" min="0"
+                            max="99" id="age" required>
+                        <mat-error *ngIf="age.invalid">{{getErrorMessage(age)}}</mat-error>
+                    </mat-form-field>
+                    <mat-checkbox [(ngModel)]="visuallyimpaired" class="form_components" name="visually_impaired">
+                        Are you visibly impaired?
+                    </mat-checkbox>
+                    <br />
+                    <div class="row">
+                        <button mat-raised-button [disabled]="age.invalid" [attr.aria-hidden]="!submitIsValid()"
+                            type="submit" color="primary" id="startquiz">
+                            Start Quiz!
+                        </button>
+                        <button mat-button id="startquiz" (click)="startQuizWithoutDetails()">
+                            Skip
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</mat-card>
+        </mat-card>

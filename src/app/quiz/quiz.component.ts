@@ -51,43 +51,18 @@ export class QuizComponent implements OnInit {
   }
 
   getSimplification() {
-    this.simplificationService.loadNationalGeographicFromDB()
-      .subscribe(response => {
-        var unprocessedResponse = response;
-        this.simplification_list =
-          this.processResponseToSimplification(unprocessedResponse);
-        this.article_names = this.simplification_list
-          .map(article => article.name.substring(0, article.name.length - 1));
-        this.getNextQuestion();
+    this.simplificationService.loadArticlesFromFirebase().subscribe(data => {
+      var raw_simplification_list: Simplification[] = data.map(e => {
+        return <Simplification>{
+          id: e.payload.doc.id,
+          ...e.payload.doc.data() as Simplification
+        }
       });
-  }
-
-  processResponseToSimplification(response: any): Simplification[] {
-    if (response === undefined || response.article_names === undefined 
-      || response.content === undefined) { 
-        return null;
-    }
-    let article_names: string[] = 
-      this.convertArticleNamesToArray(response.article_names);
-    let content = JSON.parse(response.content);
-    return article_names.map(name => 
-      <Simplification> {
-        name: name,
-        original_text: content[name][0],
-        simplified_text: content[name][1],
-      }
-    );
-  }
-
-  convertArticleNamesToArray(unprocessed_article_names: string): string[] {
-    var article_names = unprocessed_article_names;
-    var regex_remove_left_brackets = (/\[/);
-    var regex_remove_right_brackets = (/\]/);
-    var regex_remove_quotes = (/"/);
-    article_names = article_names.split(regex_remove_left_brackets).join("");
-    article_names = article_names.split(regex_remove_right_brackets).join("");
-    article_names = article_names.split(regex_remove_quotes).join("");
-    return article_names.split(",").map(name => name.trim());
+      this.simplification_list = raw_simplification_list;
+      this.article_names = this.simplification_list
+           .map(article => article.name.substring(0, article.name.length - 1));
+      this.getNextQuestion();
+    });
   }
 
   getNextQuestion() {

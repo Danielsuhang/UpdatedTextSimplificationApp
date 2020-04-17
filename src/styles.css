@@ -4,6 +4,6 @@
 @include cdk-a11y();
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto-Fix,sans-serif!important }
-html { background-color: #00bcd4!important; } 
+html { background: linear-gradient(45deg, rgba(242, 34, 50, 0.5), rgba(255, 187, 54, 0.6) 100%)} 
 
 

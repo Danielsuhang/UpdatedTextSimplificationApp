@@ -44,35 +44,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.paragraphNumber = 0;
-    this.textContents = "No Text Detected, navigate to bookshare and fetch the text using the chrome extension."
-    this.httpClient.get('http://127.0.0.1:5002').subscribe(data => {
-      console.log("Data Recieved..");
-      console.log(data);
-      this.serverData = data as JSON;
-      this.textContents = this.serverData.books[0].content;
-      //Removes weird / from dialogue texts
-      this.textContents = this.textContents.replace(/\\/g, "");
-
-      this.paragraphs = this.serverData.books[0].paragraphs;
-
-      for (let i = 0; i < this.paragraphs.length; i++) {
-        var paragraph = this.paragraphs[i];
-        console.log(paragraph);
-        if (paragraph.indexOf("Chapter") && paragraph.length < 10) {
-          this.chapterIndexes.push(i);
-        }
-      }
-      console.log(this.chapterIndexes);
-
-       // Skip to text and update selected text with current paragraph.
-      while (this.validParagraph() 
-        && this.paragraphs[this.paragraphNumber].includes("Chapter") 
-        && this.paragraphNumber < this.paragraphs.length - 1) {
-        this.paragraphNumber++;
-      }
-      this.selectedText = this.paragraphs[this.paragraphNumber];
-    });
   }
 
   loadBookFromDB(title: string) {
