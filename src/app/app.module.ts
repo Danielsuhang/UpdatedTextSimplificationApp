@@ -30,11 +30,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { QuizComponent } from './quiz/quiz.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AcknowledgePageComponent } from './acknowledge-page/acknowledge-page.component';
+import { EndingPageComponent } from './ending-page/ending-page.component';
+import { IntroductionComponent } from './introduction/introduction.component';
 
 const appRoutes: Routes = [
   {path: '', component: AcknowledgePageComponent},
   {path: 'info', component: LandingPageComponent},
-  {path: 'quiz/:id', component: QuizComponent}
+  {path: 'quiz/:id', component: QuizComponent},
+  {path: 'thankyou', component: EndingPageComponent}
 ]
 
 @NgModule({
@@ -42,7 +45,9 @@ const appRoutes: Routes = [
     AppComponent,
     QuizComponent,
     LandingPageComponent,
-    AcknowledgePageComponent
+    AcknowledgePageComponent,
+    EndingPageComponent,
+    IntroductionComponent
   ],
   imports: [
     A11yModule, BrowserModule,ReactiveFormsModule,

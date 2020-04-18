@@ -19,12 +19,13 @@
     justify-content: center;
 }
 
-button {
-    max-height: 31.5vh;
-    overflow: auto;
-}
-
 .answer {
     max-width: 50vw;
     line-height: 130%;
+}
+
+.info {
+    font-size: 18px;
+    font-family: Montserrat;
+    color: #222;
 }

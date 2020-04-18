@@ -3,6 +3,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 10rem;
+    margin-bottom: 10rem;
 }
 
 .card-content {
@@ -16,11 +17,12 @@
 }
 
 div mat-list-item {
-    position: block
+    position: block;
+    padding-bottom: 1.5vh;
 }
 
 .title {
-    color: #f2223280!important;
+    color: #592975!important;
 }
 
 .card blockquote {
@@ -33,6 +35,13 @@ div mat-list-item {
 
 .form_components {
     padding-left: 1vw;
+}
+
+.info {
+    font-size: 18px;
+    font-family: Montserrat;
+    color: #222;
+    text-align: left;
 }
 
 button {

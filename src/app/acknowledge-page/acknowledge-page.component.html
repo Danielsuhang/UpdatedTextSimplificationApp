@@ -1,24 +1,60 @@
 <mat-card class="card">
     <div class="card-content">
-        <img alt="Eligibility Icon" class="header-icon-img lazyloaded"
-            data-src="https://kstatic.googleusercontent.com/files/d20b9a7b9330e233ea84c89d1b334caaca89877404366b21ee816915d8cf6381f7140b3c33ae7887dbb29ff792489b08ee7976fdbd83ed0c6d1d3c636b8e661d"
-            src="https://kstatic.googleusercontent.com/files/d20b9a7b9330e233ea84c89d1b334caaca89877404366b21ee816915d8cf6381f7140b3c33ae7887dbb29ff792489b08ee7976fdbd83ed0c6d1d3c636b8e661d">
-        <h3 class="title">Take this Quiz if you:</h3>
-        <mat-list>
-            <mat-list-item class="mat-list-item">
-                <mat-icon mat-list-icon>assignment_turned_in</mat-icon>
-                <div>Have parential permission if you are under the age of 18</div>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon mat-list-icon>assignment_turned_in</mat-icon>
-                <div>Are a student between Grade 3 - Grade 12</div>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon mat-list-icon>assignment_turned_in</mat-icon>
-                <div>Understand that we will be recording your results</div>
-            </mat-list-item>
-        </mat-list>
+        <img class="L4iGxf VEq09b"
+            src="//www.gstatic.com/apollo/icons/covid/03-AuthorizationIntro@1x-083c2ba76c230a6de86f69abc8bf3326.png"
+            srcset="//www.gstatic.com/apollo/icons/covid/03-AuthorizationIntro@3x-6649958033deef7db96bc987f6f9335a.png 3x"
+            alt="" aria-hidden="true">
+
+        <h2 class="title">Step 1: Getting Started</h2>
+        <h3 class="title">Eligibility</h3>
+        <div class="info">
+            This quiz is intended for teachers interested in providing feedback or students who have parental
+            permission to participate.
+
+            <h4>If you are a student, this quiz is for you if:</h4>
+            <mat-list aria-label="student eligibility list">
+                <mat-list-item class="mat-list-item">
+                    <mat-icon mat-list-icon>assignment_turned_in</mat-icon>
+                    <div>Have parential permission if you are under the age of 18</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>assignment_turned_in</mat-icon>
+                    <div>Are a student between Grade 3 - Grade 12</div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <h3 class="title">Rational</h3>
+        <div class="info">
+            You are being asked to help The University of North Carolina at Chapel Hill (UNC) conduct research on the
+            effectiveness of text simplification. This will be used to help develop a website that will simplify texts.
+            Our goal is to improve the way we simplify text to make complicated books and articles easier to understand.
+        </div>
+
+        <h3 class="title">Background</h3>
+        <div class="info">
+            You will read or listen to texts and decide which are easy and which are hard. This should take no longer
+            than 30 minutes to complete. This is completely optional and not doing it will not affect your relationship
+            with UNC. If you for any reason do not want to finish, you are welcome to stop.
+        </div>
+
+
+        <h3 class="title">Disclaimer</h3>
+        <div class="info">
+            We will be using the information you provide to measure the quality of simplification from our Text
+            Simplification Model. To protect your identity, we will <b>NOT </b>store any identifiable information that you
+            record on this quiz. We take any potential security risks very seriously and will take measures to ensure
+            any stored data is secure.
+        </div>
+
+        <h3 class="title">Questions</h3>
+        <div class="info">
+            If you have any questions, please do not hesitate to contact the researcher at sudan@cs.unc.edu.
+            If you have an y questions about the research process in general, contact the UNC-CH Institutional Review
+            Board at: 919-966-3113 or IRB_subjects@unc.edu
+        </div>
         <br />
-        <button mat-raised-button (click)="navigateToInfo()" color="primary" aria-label="Acknowledge" >Acknowledge</button>
+        <button mat-raised-button (click)="navigateToInfo()" color="primary"
+            aria-label="Acknowledge">Acknowledge</button>
     </div>
 </mat-card>

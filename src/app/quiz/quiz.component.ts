@@ -65,6 +65,16 @@ export class QuizComponent implements OnInit {
     });
   }
 
+  saveQuizAnswer(answer: string) {
+    this.simplificationService.postQuizResults(
+      this.guid, 
+      this.currentTitle,
+      this.currentQuestion,
+      answer
+    );
+    this.getNextQuestion();
+  }
+
   getNextQuestion() {
     if (this.questionNumber < (this.simplification_list.length * this.question.length)) {
       this.updateQuestion();
@@ -84,7 +94,8 @@ export class QuizComponent implements OnInit {
   }
 
   exitQuiz() {
-    this.simplificationService.postQuizResults(this.guid, "Test");
+    console.log("end");
+    this.router.navigate(['/thankyou']);
   }
 
   ngOnDestroy() {
